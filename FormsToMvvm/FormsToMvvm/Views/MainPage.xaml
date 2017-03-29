@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:FormsToMvvm"
+             xmlns:vm="clr-namespace:FormsToMvvm.ViewModels"
+             x:Class="FormsToMvvm.MainPage">
+
+    <ContentPage.BindingContext>
+        <vm:MainViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout Orientation="Vertical"
+                 Padding="10,20,10,0"
+                 Spacing="10">
+
+        <Label Text="Welcome to Xamarin Forms!" 
+           VerticalOptions="Center" 
+           HorizontalOptions="Center" />
+        <SearchBar x:Name="cortesSearchBar"
+                   Text="{Binding KeyWord}"
+                   SearchCommand="{Binding FiltrarCommand}"/>
+
+        <Grid>
+
+            <ListView x:Name="lstCortes"
+                      ItemsSource="{Binding MeusCortes}"/>
+
+            <ListView x:Name="lst_sugestao_cortes"
+                      ItemsSource="{Binding Sugestoes}"
+                      IsVisible="{Binding IsVisible}"
+                      SelectedItem="{Binding CorteSelecionado}"
+                      ItemTapped="SelecionarCorte"
+                      BackgroundColor="Gray"/>
+
+        </Grid>
+
+    </StackLayout>
+
+</ContentPage>
